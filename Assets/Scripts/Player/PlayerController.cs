@@ -5,13 +5,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private LayerMask GroundLayerMask;
+
     private Rigidbody2D Rigidbody;
     private Animator animator;
     private SpriteRenderer SpriteRenderer;
+    private BoxCollider2D BoxCollider2D;
     
 
     public float moveSpeed, jumpForce;
-    public bool isGrounded;
     private float inputx;
 
 
@@ -19,10 +21,10 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isGrounded = true;
         Rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
+        BoxCollider2D = GetComponent<BoxCollider2D>();
 
     }
 
@@ -30,7 +32,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Rigidbody.velocity = new Vector2(inputx * moveSpeed, Rigidbody.velocity.y);
-
 
         if (Rigidbody.velocity.x > 0f)
         {
@@ -48,10 +49,17 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext context)
     {
-        if(context.performed && isGrounded)
+        if(context.performed && IsGrounded())
         {
             Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, jumpForce);
         }
 
     }
+
+    private bool IsGrounded()
+    {
+        float extraheight = 0.1f;
+        RaycastHit2D raycastHit = Physics2D.BoxCast(BoxCollider2D.bounds.center, BoxCollider2D.bounds.size, 0f, Vector2.down, extraheight, GroundLayerMask);
+        return raycastHit.collider != null;
+    }   
 }
