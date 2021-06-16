@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,11 +12,11 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private SpriteRenderer SpriteRenderer;
     private BoxCollider2D BoxCollider2D;
+    private PauseMenu pauseMenu;
     
-
     public float moveSpeed, jumpForce;
     private float inputx;
-
+    int lvlUnlocked;
 
 
     // Start is called before the first frame update
@@ -25,7 +26,8 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
         BoxCollider2D = GetComponent<BoxCollider2D>();
-
+        pauseMenu = FindObjectOfType<PauseMenu>();
+        lvlUnlocked = SceneManager.GetActiveScene().buildIndex;
     }
 
     // Update is called once per frame
@@ -55,6 +57,40 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    public void Pause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if(PauseMenu.IsGamePaused)
+            {
+                pauseMenu.Resume();
+            }
+            else
+            {
+                pauseMenu.Pause();
+            }
+        }
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("win"))
+        {
+
+            if (lvlUnlocked >= PlayerPrefs.GetInt("LevelsUnlocked"))
+            {
+                PlayerPrefs.SetInt("LevelsUnlocked", lvlUnlocked + 1);
+            }
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("trap"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
 
     private bool IsGrounded()
     {
@@ -62,4 +98,5 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D raycastHit = Physics2D.BoxCast(BoxCollider2D.bounds.center, BoxCollider2D.bounds.size, 0f, Vector2.down, extraheight, GroundLayerMask);
         return raycastHit.collider != null;
     }   
+
 }
