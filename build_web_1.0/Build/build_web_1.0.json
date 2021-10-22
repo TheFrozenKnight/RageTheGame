@@ -1,0 +1,16 @@
+{
+"companyName": "DefaultCompany",
+"productName": "Rage",
+"productVersion": "0.1",
+"dataUrl": "build_web_1.0.data.unityweb",
+"wasmCodeUrl": "build_web_1.0.wasm.code.unityweb",
+"wasmFrameworkUrl": "build_web_1.0.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#000000",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.4.26f1"
+}
