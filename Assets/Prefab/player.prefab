@@ -253,6 +253,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 70004431-f790-4bc8-92da-f55932ed0a01
     m_ActionName: Player/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 291d67bc-cd83-47ef-bb32-7ef7a171dc7a
+    m_ActionName: Player/Switch[/Keyboard/q,/XInputControllerWindows/buttonNorth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -273,8 +277,10 @@ MonoBehaviour:
   GroundLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  World1: {fileID: 0}
+  World2: {fileID: 0}
+  jumpForce: 6
   moveSpeed: 3
-  jumpForce: 7
 --- !u!95 &892288597226953146
 Animator:
   serializedVersion: 3
@@ -285,7 +291,7 @@ Animator:
   m_GameObject: {fileID: 5374731632386346709}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 69922b632a6426a4aa3638cb474346a9, type: 2}
+  m_Controller: {fileID: 9100000, guid: c4f0ea05a362aa2428d72bfe2570cdb7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

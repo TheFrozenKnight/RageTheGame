@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask GroundLayerMask;
     [SerializeField] private GameObject World1;
     [SerializeField] private GameObject World2;
-
+    [SerializeField] private float jumpForce = 6f;
 
     private Rigidbody2D Rigidbody;
     private Animator animator;
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D BoxCollider2D;
     private PauseMenu pauseMenu;
     
-    public float moveSpeed, jumpForce;
+    public float moveSpeed;
     private float inputx;
     int lvlUnlocked;
     bool hasDoubleJump = false;
@@ -47,6 +47,10 @@ public class PlayerController : MonoBehaviour
         else if (Rigidbody.velocity.x < 0f)
         {
             SpriteRenderer.flipX = true;
+        }
+        else
+        {
+            Rigidbody.velocity = new Vector2(0, Rigidbody.velocity.y);
         }
     }
 
@@ -117,6 +121,8 @@ public class PlayerController : MonoBehaviour
     {
         float extraheight = 0.1f;
         RaycastHit2D raycastHit = Physics2D.BoxCast(BoxCollider2D.bounds.center, BoxCollider2D.bounds.size, 0f, Vector2.down, extraheight, GroundLayerMask);
+        if (raycastHit)
+            hasDoubleJump = false;
         return raycastHit.collider != null;
     }   
 
