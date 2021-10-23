@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
     bool hasDoubleJump = false;
     bool worldChanged = false;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -51,12 +50,20 @@ public class PlayerController : MonoBehaviour
         else
         {
             Rigidbody.velocity = new Vector2(0, Rigidbody.velocity.y);
+            animator.SetBool("Run", false);
         }
+
+        if (!IsGrounded())
+            animator.SetBool("Jump", true);
+
+        if (IsGrounded())
+            animator.SetBool("Jump", false);
     }
 
     public void Move(InputAction.CallbackContext context)
     {
         inputx = context.ReadValue<Vector2>().x;
+        animator.SetBool("Run", true);
     }
     public void Jump(InputAction.CallbackContext context)
     {
@@ -122,7 +129,10 @@ public class PlayerController : MonoBehaviour
         float extraheight = 0.1f;
         RaycastHit2D raycastHit = Physics2D.BoxCast(BoxCollider2D.bounds.center, BoxCollider2D.bounds.size, 0f, Vector2.down, extraheight, GroundLayerMask);
         if (raycastHit)
+        {
             hasDoubleJump = false;
+            animator.SetBool("Jump", false);
+        }
         return raycastHit.collider != null;
     }   
 
