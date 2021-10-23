@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private LayerMask GroundLayerMask;
+    [SerializeField] private GameObject World1;
+    [SerializeField] private GameObject World2;
+
 
     private Rigidbody2D Rigidbody;
     private Animator animator;
@@ -17,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed, jumpForce;
     private float inputx;
     int lvlUnlocked;
+    bool hasDoubleJump = false;
+    bool worldChanged = false;
 
 
     // Start is called before the first frame update
@@ -55,7 +60,11 @@ public class PlayerController : MonoBehaviour
         {
             Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, jumpForce);
         }
-
+        else if(hasDoubleJump && context.performed)
+        {
+            Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, jumpForce);
+            hasDoubleJump = false;
+        }
     }
     public void Pause(InputAction.CallbackContext context)
     {
@@ -71,6 +80,13 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    public void Switch(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            ChangeWorld();
+        }
+    }
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("win"))
@@ -81,6 +97,11 @@ public class PlayerController : MonoBehaviour
                 PlayerPrefs.SetInt("LevelsUnlocked", lvlUnlocked + 1);
             }
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        if(collision.CompareTag("PowerUp"))
+        {
+            hasDoubleJump = true;
+            collision.gameObject.SetActive(false);
         }
     }
 
@@ -98,5 +119,21 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D raycastHit = Physics2D.BoxCast(BoxCollider2D.bounds.center, BoxCollider2D.bounds.size, 0f, Vector2.down, extraheight, GroundLayerMask);
         return raycastHit.collider != null;
     }   
+
+    private void ChangeWorld()
+    {
+        if(!worldChanged)
+        {
+            World1.SetActive(false);
+            World2.SetActive(true);
+            worldChanged = true;
+        }
+        else
+        {
+            World1.SetActive(true);
+            World2.SetActive(false);
+            worldChanged = false;
+        }
+    }
 
 }

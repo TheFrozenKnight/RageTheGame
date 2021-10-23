@@ -6,6 +6,7 @@ TagManager:
   tags:
   - win
   - trap
+  - PowerUp
   layers:
   - Default
   - TransparentFX
