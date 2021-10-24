@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public AudioListener al;
     public static bool IsGamePaused = false;
     public GameObject Mouse;
 
@@ -57,11 +58,12 @@ public class PauseMenu : MonoBehaviour
     }
     public void ToggleMusic()
     {
-        
+
+        al.enabled = !al.enabled;
     }
     public void ToggleSFX()
     {
-        
+        al.enabled = !al.enabled;
     }
     public void CloseOptionsMenu()
     {

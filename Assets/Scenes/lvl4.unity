@@ -796,6 +796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mouse: {fileID: 1838112356}
+  M: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1625,6 +1626,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 891836045459308744, guid: 31af43fe74c7ad247b9005ccaf5d7c7a,
         type: 3}
+      propertyPath: al
+      value: 
+      objectReference: {fileID: 519420029}
+    - target: {fileID: 891836045459308744, guid: 31af43fe74c7ad247b9005ccaf5d7c7a,
+        type: 3}
       propertyPath: Mouse
       value: 
       objectReference: {fileID: 1838112356}
@@ -1854,6 +1860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735a126049ce73a4680c2233b562f96c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  al: {fileID: 0}
   Mouse: {fileID: 0}
   pauseMenuPanel: {fileID: 432471140}
   optionsMenuPanel: {fileID: 520289048}

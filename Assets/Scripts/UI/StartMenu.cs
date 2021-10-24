@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class StartMenu : MonoBehaviour
 {
-
+    public AudioListener al;
     public GameObject optionsMenuPanel, creditsPanel;
     public GameObject optionsFirstButton, optionsClosedButton, creditsFirstButton, creditsClosedButton;
 
@@ -27,11 +27,11 @@ public class StartMenu : MonoBehaviour
     }
     public void ToggleMusic()
     {
-
+        al.enabled = !al.enabled;
     }
     public void ToggleSFX()
     {
-
+        al.enabled = !al.enabled;
     }
     public void onOptionsBackButtonClick()
     {
