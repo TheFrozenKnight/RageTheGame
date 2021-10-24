@@ -77,10 +77,12 @@ public class PlayerController : MonoBehaviour
     {
         if(context.performed && IsGrounded())
         {
+            AudioManager.instance.Play("Jump");
             Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, jumpForce);
         }
         else if(hasDoubleJump && context.performed)
         {
+            AudioManager.instance.Play("Jump");
             Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, jumpForce);
             hasDoubleJump = false;
         }
@@ -146,6 +148,7 @@ public class PlayerController : MonoBehaviour
 
     private void ChangeWorld()
     {
+        AudioManager.instance.Play("Whoosh");
         if(!worldChanged)
         {
             World1.SetActive(false);
