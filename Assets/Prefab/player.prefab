@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 892288597226953146}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 99
-  m_Sprite: {fileID: -3293801358556699587, guid: 7140996ca63bfea4fa7421dc6856584f,
+  m_Sprite: {fileID: -467307283419413426, guid: bc9af753aa7276944bb369ea2938233d,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -104,7 +104,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.18, y: 2.52}
+    oldSize: {x: 1.25, y: 3.2}
     newSize: {x: 0.86, y: 0.83}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -257,6 +257,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 291d67bc-cd83-47ef-bb32-7ef7a171dc7a
     m_ActionName: Player/Switch[/Keyboard/q,/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 83849fe2-3a18-42b5-82b9-256af0213bfc
+    m_ActionName: Player/Mouse[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9f327b26-b788-4b77-a711-87110375259f
+    m_ActionName: Movement/Mouse
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -277,8 +285,6 @@ MonoBehaviour:
   GroundLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  World1: {fileID: 0}
-  World2: {fileID: 0}
   jumpForce: 6
   moveSpeed: 3
 --- !u!95 &892288597226953146

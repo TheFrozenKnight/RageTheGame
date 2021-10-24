@@ -6,9 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private LayerMask GroundLayerMask;
-    [SerializeField] private GameObject World1;
-    [SerializeField] private GameObject World2;
+    [SerializeField] private LayerMask GroundLayerMask; 
     [SerializeField] private float jumpForce = 6f;
 
     private Rigidbody2D Rigidbody;
@@ -16,16 +14,26 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer SpriteRenderer;
     private BoxCollider2D BoxCollider2D;
     private PauseMenu pauseMenu;
-    
+    private GameObject World1;
+    private GameObject World2;
+
     public float moveSpeed;
     private float inputx;
     int lvlUnlocked;
     bool hasDoubleJump = false;
     bool worldChanged = false;
 
+    private void Awake()
+    {
+        //StartCoroutine(AssignWorlds());
+        World1 = GameObject.Find("World1");
+        World2 = GameObject.Find("World2");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        World2.SetActive(false);
         Rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
