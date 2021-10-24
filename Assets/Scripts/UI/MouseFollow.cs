@@ -7,12 +7,14 @@ public class MouseFollow : MonoBehaviour
     private Vector3 target;
 
     public GameObject Mouse;
-    //public float Offset;
+    public bool M = false;
 
     // Use this for initialization
     void Start()
     {
         Cursor.visible = false;
+
+        Mouse.SetActive(M);
     }
 
     // Update is called once per frame

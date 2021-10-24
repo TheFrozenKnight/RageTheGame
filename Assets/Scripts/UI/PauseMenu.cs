@@ -8,14 +8,24 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static bool IsGamePaused = false;
+    public GameObject Mouse;
 
     public GameObject pauseMenuPanel, optionsMenuPanel;
     public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton;
+
+    void Start()
+    {
+        Mouse.SetActive(false);
+    }
 
     public void Resume()
     {
         pauseMenuPanel.SetActive(false);
         optionsMenuPanel.SetActive(false);
+
+        Mouse.SetActive(false); 
+        Cursor.visible = false;
+
         Time.timeScale = 1f;
         IsGamePaused = false;
     }
@@ -23,6 +33,10 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuPanel.SetActive(true);
         optionsMenuPanel.SetActive(false);
+
+        Mouse.SetActive(true);
+        Cursor.visible = false;
+
         Time.timeScale = 0f;
         IsGamePaused = true;
 
