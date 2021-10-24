@@ -16,6 +16,13 @@ public class FallingPlatform : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             rb.constraints = RigidbodyConstraints2D.None;
+            StartCoroutine(ColliderDisable());
         }
+    }
+
+    IEnumerator ColliderDisable()
+    {
+        yield return new WaitForSeconds(0.75f);
+        gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
     }
 }
